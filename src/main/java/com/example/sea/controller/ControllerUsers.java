@@ -1,5 +1,9 @@
 package com.example.sea.controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
@@ -33,13 +37,18 @@ public class ControllerUsers {
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/user")
-	public ResponseEntity<ModelUsers> saveUsers(@RequestBody UsersRecordDto usersRecordDto){
-		System.out.println("teste");
-		ModelUsers modelUsers = new ModelUsers();
-		BeanUtils.copyProperties(usersRecordDto, modelUsers);
+	public ResponseEntity<?> saveUsers(@RequestBody UsersRecordDto usersRecordDto){
 		
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repostoryUsers.save(modelUsers));
+		ModelUsers modelUsers = new ModelUsers();
+		ModelUsers emailValidacao = new ModelUsers();
+		emailValidacao = repostoryUsers.findByEmail(usersRecordDto.getEmail());
+		if(emailValidacao == null) {
+			BeanUtils.copyProperties(usersRecordDto, modelUsers);
+			return ResponseEntity.status(HttpStatus.CREATED).body(repostoryUsers.save(modelUsers));
+
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body("Email ja esxistente");
 	}
 	
 	@GetMapping(value = "/listusers")
@@ -57,13 +66,11 @@ public class ControllerUsers {
 	}
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/login")
-	public ResponseEntity<?> longar(@RequestBody LogarDto logar){
-		System.out.println("entrou");
+	public ResponseEntity<?> login(@RequestBody LogarDto logar){
 		ModelUsers email = repostoryUsers.findByEmail(logar.getEmail());
-		ModelUsers senha = repostoryUsers.findBySenha(logar.getSenha());
-		if(email == null && senha == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Senha ou Email incorretos");
+		if(email != null && logar.getSenha().equals(email.getSenha())){
+			return ResponseEntity.status(HttpStatus.OK).body("usuario encontrado");
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("usuario encontrado");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Senha ou Email incorretos");
 	}
 }
