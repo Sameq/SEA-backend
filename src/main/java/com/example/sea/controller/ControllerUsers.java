@@ -23,22 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.sea.dtos.LogarDto;
 import com.example.sea.dtos.UsersRecordDto;
 import com.example.sea.model.ModelUsers;
-import com.example.sea.repository.RepostoryUsers;
+import com.example.sea.repository.RepositoryUsers;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.experimental.var;
 
 @RestController
-//	@RequestMapping(value = "/user", produces = MediaType.TEXT_PLAIN_VALUE,  method = RequestMethod.POST )
 public class ControllerUsers {
 	@Autowired
-	RepostoryUsers repostoryUsers; 
+	RepositoryUsers repostoryUsers; 
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/user")
 	public ResponseEntity<?> saveUsers(@RequestBody UsersRecordDto usersRecordDto){
-		
 		ModelUsers modelUsers = new ModelUsers();
 		ModelUsers emailValidacao = new ModelUsers();
 		emailValidacao = repostoryUsers.findByEmail(usersRecordDto.getEmail());

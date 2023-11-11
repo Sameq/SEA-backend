@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.sea.dtos.EmailDto;
 import com.example.sea.dtos.RecuperaraSenhaDto;
 import com.example.sea.model.ModelUsers;
-import com.example.sea.repository.RepostoryUsers;
+import com.example.sea.repository.RepositoryUsers;
 import com.example.sea.service.EmailService;
 
 @RestController
 public class ControllerEmail {
 	@Autowired
-	RepostoryUsers repostoryUsers; 
+	RepositoryUsers repostoryUsers; 
 	@Autowired
 	private  EmailService emailService;
 	
