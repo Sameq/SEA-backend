@@ -2,11 +2,19 @@ package com.example.sea.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ModelUsers implements Serializable {
     private static final long serialVersion = 1L;
     @Id
@@ -17,44 +25,4 @@ public class ModelUsers implements Serializable {
     private String email;
     private String senha;
     private String categoria;
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
-	public Integer getIdUsers() {
-        return idUsers;
-    }
-
-    public void setIdUsers(Integer idUsers) {
-        this.idUsers = idUsers;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 }

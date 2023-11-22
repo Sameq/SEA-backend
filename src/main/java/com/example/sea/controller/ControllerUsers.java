@@ -33,7 +33,6 @@ import lombok.experimental.var;
 public class ControllerUsers {
 	@Autowired
 	RepositoryUsers repostoryUsers; 
-	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/user")
 	public ResponseEntity<?> saveUsers(@RequestBody UsersRecordDto usersRecordDto){

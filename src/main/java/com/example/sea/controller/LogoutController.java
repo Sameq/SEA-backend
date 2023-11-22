@@ -12,5 +12,5 @@ public class LogoutController {
 
 
         return "redirect:/login";
-    }
+    }// função que caio fez meio duvidosa KKKKKKKK
 }
