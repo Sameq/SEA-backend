@@ -13,12 +13,4 @@ public class SeaApplication {
         SpringApplication.run(SeaApplication.class, args);
         
     }
-//    @Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurer() {
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:8080");
-//			}
-//		};
-//	}
 }
